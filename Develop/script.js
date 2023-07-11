@@ -1,33 +1,40 @@
-$(function() {
-  // Save button click event listener
-  $(".saveBtn").on("click", function() {
-    const timeBlockId = $(this).closest(".time-block").attr("id");
-    const userInput = $(this).siblings(".description").val();
-    localStorage.setItem(timeBlockId, userInput);
-  });
+// Wait for the DOM to be fully loaded before executing the JavaScript code
+document.addEventListener("DOMContentLoaded", function() {
+  // Display the current day at the top of the calendar
+  var currentDayElement = document.getElementById("currentDay");
+  currentDayElement.textContent = dayjs().format("dddd, MMMM D, YYYY");
 
-  // Apply the past, present, or future class to each time block
-  $(".time-block").each(function() {
-    const blockHour = parseInt($(this).attr("id").split("-")[1]);
-    const currentHour = dayjs().format("H");
+  // Get the current hour in 24-hour format
+  var currentHour = dayjs().format("H");
 
+  // Select all the time-block elements
+  var timeBlocks = document.querySelectorAll(".time-block");
+
+  // Loop through each time block
+  timeBlocks.forEach(function(timeBlock) {
+    // Get the hour from the time block's ID
+    var blockHour = parseInt(timeBlock.id.split("-")[1]);
+
+    // Add the appropriate class to the time block based on the current hour
     if (blockHour < currentHour) {
-      $(this).addClass("past");
+      timeBlock.classList.add("past");
     } else if (blockHour === currentHour) {
-      $(this).addClass("present");
+      timeBlock.classList.add("present");
     } else {
-      $(this).addClass("future");
+      timeBlock.classList.add("future");
     }
-  });
 
-  // Set the values of the textarea elements from local storage
-  $(".time-block").each(function() {
-    const timeBlockId = $(this).attr("id");
-    const savedUserInput = localStorage.getItem(timeBlockId);
-    $(this).find(".description").val(savedUserInput);
-  });
+    // Get the textarea and button elements within the time block
+    var textarea = timeBlock.querySelector("textarea");
+    var saveButton = timeBlock.querySelector(".saveBtn");
 
-  // Display the current date in the header of the page
-  $("#currentDay").text(dayjs().format("dddd, MMMM D, YYYY"));
+    // Load any saved event for the time block from local storage
+    textarea.value = localStorage.getItem(timeBlock.id);
+
+    // Save the event to local storage when the save button is clicked
+    saveButton.addEventListener("click", function() {
+      localStorage.setItem(timeBlock.id, textarea.value);
+    });
+  });
 });
 
