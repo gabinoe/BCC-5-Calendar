@@ -7,7 +7,6 @@ The "Work Day Scheduler" is a professional and user-friendly calendar applicatio
 - HTML
 - CSS
 - JavaScript
-- [Day.js](https://day.js.org/) (A modern JavaScript library for date and time manipulation)
 
 ## Features
 
@@ -21,32 +20,13 @@ The "Work Day Scheduler" is a professional and user-friendly calendar applicatio
 
 ## Getting Started
 
-To make the most of the "Work Day Scheduler," simply open the `index.html` file in your preferred web browser. The application's responsive layout ensures optimal usability on various devices.
-
 1. Scroll down to explore the time blocks for standard business hours.
 2. Each time block is visually distinguished with the appropriate color based on its temporal relation to the present moment.
 3. Click into any time block to begin inputting an event or task for that hour.
 4. To save the entered event, click the save button (represented by a floppy disk icon) within the respective time block.
 
-## Folder Structure
-
-- `index.html`: The primary HTML file that elegantly presents the front-end structure of the application.
-- `style.css`: The meticulously crafted CSS file that artfully styles each element of the application in accordance with a professional design approach.
-- `script.js`: The JavaScript file responsible for delivering dynamic functionality, including time block creation, color-coding, event handling, and seamless local storage interactions.
-- `develop/`: A folder that contains a previous version of the JavaScript file (if any).
-- `images/`: A folder that may store any images used in the project to enhance user experience.
-- `README.md`: The comprehensive document you are currently reading, providing valuable insights into the application's features and usage.
-
-## Author
-
-This sophisticated "Work Day Scheduler" application is skillfully crafted by [Your Name], a dedicated developer committed to delivering user-centric solutions.
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE), granting users the freedom to reuse and modify the application according to their requirements.
 
-## Acknowledgments
-
-- The application incorporates the powerful Day.js library, enabling seamless date and time manipulation.
-- Inspiration and design elements were thoughtfully derived from various reputable sources and tutorials, ensuring a refined user interface.
 

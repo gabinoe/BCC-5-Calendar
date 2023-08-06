@@ -1,52 +1,54 @@
-document.addEventListener("DOMContentLoaded", function () {
-  var currentDayElement = document.getElementById("currentDay");
-  currentDayElement.textContent = dayjs().format("dddd, MMMM D, YYYY");
+$(document).ready(function () {
 
-  // Function to create the time blocks dynamically
-  function createTimeBlocks() {
-    var container = document.querySelector(".container-fluid");
-    var currentHour = dayjs().format("H");
+  const $notification = $('.notification');
+  const $timeBlocks = $('.time-block');
+  const currentHour = dayjs().hour();
 
-    for (var hour = 9; hour <= 17; hour++) {
-      var timeBlock = document.createElement("div");
-      timeBlock.id = "hour-" + hour;
-      timeBlock.className = "row time-block";
-      if (hour < currentHour) {
-        timeBlock.classList.add("past");
-      } else if (hour == currentHour) {
-        timeBlock.classList.add("present");
+  function updateHourColors() {
+    $timeBlocks.each(function () {
+      const $this = $(this);
+      const blockHour = parseInt($this.attr('id').split('-')[1]);
+
+      if (blockHour < currentHour) {
+        $this.removeClass('present future').addClass('past');
+      } else if (blockHour === currentHour) {
+        $this.removeClass('past future').addClass('present');
       } else {
-        timeBlock.classList.add("future");
+        $this.removeClass('past present').addClass('future');
       }
-
-      timeBlock.innerHTML = `
-        <div class="col-2 col-md-1 hour text-center py-3">${hour}AM</div>
-        <textarea class="col-8 col-md-10 description" rows="3"></textarea>
-        <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-          <i class="fas fa-save" aria-hidden="true"></i>
-        </button>
-      `;
-
-      container.appendChild(timeBlock);
-    }
+    });
   }
 
-  // Call the function to create the time blocks
-  createTimeBlocks();
+  function handleSaveButtonClick() {
+    const $description = $(this).siblings('.description');
+    const time = $(this).parent().attr('id');
+    const value = $description.val();
 
-  var timeBlocks = document.querySelectorAll(".time-block");
+    localStorage.setItem(time, value);
+    $notification.addClass('show');
+    setTimeout(function () {
+      $notification.removeClass('show');
+    }, 5000);
+  }
 
-  timeBlocks.forEach(function (timeBlock) {
-    var textarea = timeBlock.querySelector("textarea");
-    var saveButton = timeBlock.querySelector(".saveBtn");
+  function loadSavedEvents() {
+    $timeBlocks.each(function () {
+      const $this = $(this);
+      const time = $this.attr('id');
+      const savedEvent = localStorage.getItem(time);
 
-    // Load events from local storage and set them in the textarea
-    textarea.value = localStorage.getItem(timeBlock.id);
-
-    // Save event to local storage when the save button is clicked
-    saveButton.addEventListener("click", function () {
-      localStorage.setItem(timeBlock.id, textarea.value);
+      $this.find('.description').val(savedEvent);
     });
-  });
-});
+  }
 
+
+  $('.saveBtn').on('click', handleSaveButtonClick);
+
+  // Initial setup
+  updateHourColors();
+  setInterval(updateHourColors, 15000);
+  loadSavedEvents();
+
+  // Display current day on page
+  $('#currentDay').text(dayjs().format('dddd, MMMM D, YYYY'));
+});
