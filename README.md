@@ -1,6 +1,6 @@
 # Work Day Scheduler
 
-The "Work Day Scheduler" is a professional and user-friendly calendar application that empowers users to create and organize their daily work schedules. It presents time blocks for standard business hours (9 AM to 5 PM) and intuitively color-codes each time block to indicate whether it is in the past, present, or future. The application allows users to seamlessly enter events or tasks for each time block, and all entered data is automatically saved in local storage, ensuring that the schedule persists across page refreshes.
+The "Work Day Scheduler" is a professional and user-friendly calendar application that users use to create and organize their daily work schedules. It presents time blocks for standard business hours (9 AM to 5 PM) and intuitively color-codes each time block to indicate whether it is in the past, present, or future. The application allows users to seamlessly enter events or tasks for each time block, and all entered data is automatically saved in local storage, ensuring that the schedule persists across page refreshes.
 
 ## Technologies Used
 
@@ -23,7 +23,7 @@ The "Work Day Scheduler" is a professional and user-friendly calendar applicatio
 1. Scroll down to explore the time blocks for standard business hours.
 2. Each time block is visually distinguished with the appropriate color based on its temporal relation to the present moment.
 3. Click into any time block to begin inputting an event or task for that hour.
-4. To save the entered event, click the save button (represented by a floppy disk icon) within the respective time block.
+4. To save the entered event, click the save button within the respective time block.
 
 ## License
 
